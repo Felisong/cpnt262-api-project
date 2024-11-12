@@ -36,17 +36,19 @@
       <main class="containers">
         <div class="temperature-data-container">
           <h2 class="temperature">Temperature:</h2>
-          <h3 class="temperature" id="temperature-data">30 c</h3>
+          <h2 class="temperature" id="temperature-data">30 c</h2>
           <p class="temperature">hourly data?</p>
         </div>
         <!-- form container -->
         <div class="input-container">
           <form id="form">
-            <label for="city">City?</label>
+            <label for="city"> <strong>City?</strong></label>
             <br />
             <input type="text" id="city" name="city" required />
             <br />
-            <label for="temp-unit" id="temp-unit">Preferred Unit?</label>
+            <label for="temp-unit" id="temp-unit">
+              <strong> Preferred Unit? </strong>
+            </label>
             <br />
             <div class="radio-container">
               <input
@@ -67,6 +69,7 @@
               <label for="celsius"> fahrenheit</label>
               <br />
             </div>
+            <button class="btn" type="submit">Submit</button>
           </form>
         </div>
       </main>
