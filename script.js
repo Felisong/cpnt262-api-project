@@ -1,13 +1,3 @@
-// API call
-const weatherApi = `http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${weatherApiKey}`;
-// API key
-const weatherApiKey = `dc20084f2a7551ca41da945c1298f0c7`;
-
-// API CALL for geo
-// API Key for geo
-// https://openweathermap.org/api/geocoding-api
-// get this api working as well so i can enter the city and it gets the co-ordinates for the weather map
-
 // VARIABLES
 const city = document.getElementById("city");
 const celsius = document.getElementById("celsius");
@@ -16,16 +6,28 @@ const submitBtn = document.querySelector(".btn");
 // variables to make interact
 const weatherList = document.getElementById("data-list");
 const temperature = document.getElementById("temperature-data");
+let lat = 51;
+let lon = 114;
+let cityName = `calgary`;
+
+// API key
+const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
+// API call
+const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
 // GETTING AND PLACING DATA FROM API
 document.addEventListener("DOMContentLoaded", async function getData() {
   // variable for incoming data
-  let weatherData;
-  let geoData;
 
   // try to get data, catch if it doesn't load
-  // inside the data if it loads, can stylize or add in here
+  const responses = await Promise.all([fetch(weatherApi), fetch(geoApi)]);
 
+  const weatherData = await responses[0].json();
+  const geoData = await responses[1].json();
+
+  console.log(`test: ` + weatherData);
+  // inside the data if it loads, can stylize or add in here
   // catch
   // const fetch data async () = > copy and paste from temi,
   //should be a way to load the global and geo api into their respective variables for us later
@@ -65,3 +67,11 @@ document.addEventListener("DOMContentLoaded", async function getData() {
 // depending on keywords, interactive background if I have time.
 
 //FUNCTIONS BELOW
+
+// fetch API
+const fetchData = async () => {
+  const response = await fetch(endpoint);
+  console.log("response:", response);
+  const data = await response.json();
+  return data.data;
+};

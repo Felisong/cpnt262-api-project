@@ -25,6 +25,8 @@ I will be adding more to this later. I am just creating this so I can start work
 
 - my mom for helping me realize how to kind of flowchart.
 
+- [dev.tp](https://dev.to/alexmercedcoder/making-multiple-api-calls-in-javascript-kip)
+
 https://icon-sets.iconify.design/hugeicons/celsius/
 
 https://icon-sets.iconify.design/hugeicons/fahrenheit/
