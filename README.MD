@@ -5,3 +5,11 @@ This is a web app to tell you the temperature according to your inputs. It is pr
 ' link here '
 
 I will be adding more to this later. I am just creating this so I can start work on it soon.
+
+## Attributes
+
+- [iconify](https://icon-sets.iconify.design/?query=celsius)
+
+https://icon-sets.iconify.design/hugeicons/celsius/
+
+https://icon-sets.iconify.design/hugeicons/fahrenheit/

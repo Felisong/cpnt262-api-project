@@ -7,6 +7,7 @@
       name="Weather Web App"
       content="visit this site to view the weather of any specified city."
     />
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
     <title>Weather Web App</title>
@@ -17,8 +18,38 @@
         <h1 class="header-Intro">Hello User!</h1>
       </header>
       <main>
-        <div class="temperature-data-container"></div>
+        <div class="temperature-data-container">
+          <h2 class="temperature">Temperature:</h2>
+          <h3 class="temperature" id="temperature-data">30 c</h3>
+          <p class="temperature">hourly data?</p>
+        </div>
+        <div class="input-container">
+          <form id="form">
+            <label for="city">City?</label>
+            <input type="text" id="city" name="city" required />
+            <br />
+            <label for="temp-unit" id="temp-unit">Preferred Unit?</label>
+            <br />
+            <div class="radio-container">
+              <input type="radio" id="celsius" name="celsius" value="celsius" />
+              <label for="celsius"> Celsius</label>
+              <br />
+              <input
+                type="radio"
+                id="fahrenheit"
+                name="fahrenheit"
+                value="fahrenheit"
+              />
+              <label for="celsius"> fahrenheit</label>
+              <br />
+            </div>
+          </form>
+        </div>
       </main>
+      <div class="shape1 shape"></div>
+      <div class="shape2 shape"></div>
+      <div class="shape3 shape"></div>
+      <div class="shape4 shape"></div>
     </div>
   </body>
 </html>
