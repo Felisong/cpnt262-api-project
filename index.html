@@ -26,31 +26,42 @@
     <title>Weather Web App</title>
   </head>
   <body>
+    <!-- animation container for interactive background -->
     <div class="animation-container" id="animation-container">
+      <!-- header section -->
       <header>
         <h1 class="header-Intro">Hello User!</h1>
       </header>
+      <!-- main body for both containers -->
       <main class="containers">
         <div class="temperature-data-container">
           <h2 class="temperature">Temperature:</h2>
           <h3 class="temperature" id="temperature-data">30 c</h3>
           <p class="temperature">hourly data?</p>
         </div>
+        <!-- form container -->
         <div class="input-container">
           <form id="form">
             <label for="city">City?</label>
+            <br />
             <input type="text" id="city" name="city" required />
             <br />
             <label for="temp-unit" id="temp-unit">Preferred Unit?</label>
             <br />
             <div class="radio-container">
-              <input type="radio" id="celsius" name="celsius" value="celsius" />
+              <input
+                type="radio"
+                id="celsius"
+                name="preferred-temp-unit"
+                value="celsius"
+                required
+              />
               <label for="celsius"> Celsius</label>
               <br />
               <input
                 type="radio"
                 id="fahrenheit"
-                name="fahrenheit"
+                name="preferred-temp-unit"
                 value="fahrenheit"
               />
               <label for="celsius"> fahrenheit</label>
@@ -59,8 +70,8 @@
           </form>
         </div>
       </main>
-      <img src="tba" alt="a graphic of a cloud" class="cloud" />
-      <img src="tbh" alt="" class="sun" />
+      <!-- <img src="tba" alt="a graphic of a cloud" class="cloud" />
+      <img src="tbh" alt="" class="sun" /> -->
     </div>
   </body>
 </html>
