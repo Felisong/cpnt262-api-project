@@ -31,7 +31,6 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 .temperature-data-container {
   display: flex;
@@ -70,8 +69,7 @@ header {
   margin: 1rem;
   transition: 0.3s;
 }
-.btn:hover,
-:active {
+.btn:hover {
   transform: scale(1.1);
 }
 /*  header and temperature */
