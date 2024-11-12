@@ -1,13 +1,35 @@
 :root {
-  --background-color: #fff;
-  --title-color: #fff;
-  --text-color: #fff;
-  --second-text-color: #fff
-  --container-color: #fff;
+  --background-color: #91dbda;
+  --title-color: #11100f;
+  --text-color: #181717;
+  --second-text-color: #252424;
+  --container-color: #e88e45;
 }
 body {
   margin: 0;
   padding: 0;
+  width: 200vw;
+  height: 200vh;
+  background: linear-gradient(var(--background-color), #8289d5);
+}
+header {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.containers {
+  display: flex;
+  justify-content: center;
+  margin: auto 0;
+}
+.temperature-data-container {
+}
+
+.animation-container {
   width: 100vw;
   height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition: 0.5s;
 }
