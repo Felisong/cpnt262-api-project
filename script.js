@@ -16,17 +16,12 @@ const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
+let masterData;
+
 // GETTING AND PLACING DATA FROM API
 document.addEventListener("DOMContentLoaded", async function getData() {
   // variable for incoming data
-
   // try to get data, catch if it doesn't load
-  const responses = await Promise.all([fetch(weatherApi), fetch(geoApi)]);
-
-  const weatherData = await responses[0].json();
-  const geoData = await responses[1].json();
-
-  console.log(`test: ` + weatherData);
   // inside the data if it loads, can stylize or add in here
   // catch
   // const fetch data async () = > copy and paste from temi,
@@ -69,9 +64,3 @@ document.addEventListener("DOMContentLoaded", async function getData() {
 //FUNCTIONS BELOW
 
 // fetch API
-const fetchData = async () => {
-  const response = await fetch(endpoint);
-  console.log("response:", response);
-  const data = await response.json();
-  return data.data;
-};
