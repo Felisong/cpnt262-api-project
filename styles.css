@@ -1,0 +1,13 @@
+:root {
+  --background-color: #fff;
+  --title-color: #fff;
+  --text-color: #fff;
+  --second-text-color: #fff
+  --container-color: #fff;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
