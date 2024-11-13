@@ -12,13 +12,19 @@ let c = sessionStorage.getItem("celsius");
 let f = sessionStorage.getItem("fahrenheit");
 let username = getCookie("username");
 
+// loose
+let geodata;
+let weatherData;
+let lat;
+let lon;
+let unit;
 // API key
 const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
-// API call
-const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+// // API call
+const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
+const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
-// console.log(temperatureData);
+console.log(`current:${celsius.value}`);
 
 document.addEventListener("DOMContentLoaded", async function () {
   // call askName()
@@ -38,13 +44,14 @@ function saveLocalStorage("city");
 function saveSessionStorage("celsius");
 function saveSessionStorage("celsius");
 
+// end of button?
+
+// update values / keeps if they were already there.
 cityLocal = localStorage.getItem("city");
 c = sessionStorage.getItem("celsius");
 f = sessionStorage.getItem("fahrenheit");
 
 // console log to check values later
-
-
 // FETCH GEO API
 /*
 
@@ -53,26 +60,59 @@ f = sessionStorage.getItem("fahrenheit");
 
     // error in case api is empty
     if (geoData === 0) {
-      weatherList.innerHTML = `<p> unable to fetch data. Please try again later</p>`;
+      throw new erorr(error.message)
       return;
     }
     // make data into something I can see
     // console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
     console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
 
+    //value to fetch api
+    let lan = weather.path to lang
+    let lon = weather. path to lon
 
-    // inside the data if it loads, can stylize or add in here
+    // TO SELECT C OR F IN DATA.
+// switch ()
+case `fahrenheit` {
+unit = `imperial`}
+case `celsius` {
+unit = `metric`}
+;
+
+    // TRY FETCH {
+    weatherData= await fetchData(weatherApi);
+    // error in case api is empty
+    if (weatherData === 0) {
+      throw new erorr(error.message)
+      return;
+    }
+     // make data into something I can see
+     // create forEach() to show data for primitively
+     {
+     const data = document.createElement = "div"
+     // give classname to element
+     // fit content of width/ height
+     // appendChild to temperatureData container
+     // see the basics of how it looks then stylize.
+     }
   } catch (error) {
     console.log(`Error fetching data` > error);
   }
 });
-/*
-
 }
 */
 });
 
 //FUNCTIONS
+
+// fetch API
+const fetchData = async (url) => {
+  const response = await fetch(url);
+  console.log("response:", response);
+  const data = await response.json();
+  return data;
+};
+
 // localStorage Functions
 function saveLocalStorage(id) {
   let data = document.getElementById(id).value;
