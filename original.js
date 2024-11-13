@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   let geoData;
   let lat;
   let lon;
-  let cityName = document.getElementById("city").value;
+  let cityName = `calgary`;
 
   // save to local storage
 
