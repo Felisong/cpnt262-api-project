@@ -17,7 +17,7 @@ const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&l
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
 // GETTING AND PLACING DATA FROM API
-document.addEventListener("DOMContentLoaded", async function getData() {
+document.addEventListener("DOMContentLoaded", async function () {
   let weatherData;
   let geoData;
 
@@ -25,14 +25,20 @@ document.addEventListener("DOMContentLoaded", async function getData() {
     // fetching api data
     weatherData = await fetchData(weatherApi);
     geoData = await fetchData(geoApi);
-    console.log(geoData);
 
     // error in case api is empty
     if (weatherData === 0 || geoData === 0) {
       weatherList.innerHTML = `<p> unable to fetch data. Please try again later</p>`;
+      return;
     }
-
+    // make data into arrays
+    console.log(`weather response: ` + weatherData);
+    console.log(`geocoder response: ` + geoData);
     // inside the data if it loads, can stylize or add in here
+
+    //
+
+    //
     // how do i want to start the actual work
     //is user name in cookies?
     //if not, alert here as soon as user loads in "Please input your name".
