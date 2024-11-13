@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       return;
     }
     // make data into arrays
-    console.log(`weather response: ` + weatherData);
-    console.log(`geocoder response: ` + geoData);
+    console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
+    console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
     // inside the data if it loads, can stylize or add in here
 
     //
@@ -82,5 +82,5 @@ const fetchData = async (url) => {
   const response = await fetch(url);
   console.log("response:", response);
   const data = await response.json();
-  return data.data;
+  return data;
 };
