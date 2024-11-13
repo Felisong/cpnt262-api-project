@@ -29,6 +29,9 @@ I will be adding more to this later. I am just creating this so I can start work
 
 - [perplexity.ai](https://www.perplexity.ai) for specific questions on specific pieces of code.
 
+- [stackoverflow.com](https://stackoverflow.com/)
+  -specifically [this one](https://stackoverflow.com/questions/58211513/how-can-i-display-a-javascript-prompt-once-on-website-load)
+
 https://icon-sets.iconify.design/hugeicons/celsius/
 
 https://icon-sets.iconify.design/hugeicons/fahrenheit/

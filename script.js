@@ -3,16 +3,40 @@ const city = document.getElementById("city");
 const celsius = document.getElementById("celsius");
 const fahrenheit = document.getElementById("fahrenheit");
 const submitBtn = document.querySelector(".btn");
-// variables to make interact
-const temperature = document.getElementById("temperature-data");
-const humidity = document.getElementById("humidity");
-const feelsLike = document.getElementById("feelsLike");
-const condition = document.getElementById("condition");
+const greeting = document.querySelector(".header-Intro");
+const temperatureData = document.querySelector("temperature-data-container");
+let firstName;
+// Local storage/ cookie variables
+let cityLocal = localStorage.getItem("city");
+let cdegrees = localStorage.getItem("celsius");
+let fdegrees = localStorage.getItem("fahrenheit");
+let username = getCookie("username");
 
-// get from Storage/ cookies or session.
-// let cityName = getCookie("city");
-// let PrefTemp = some function to get localstorage of this (if condition c or f)
-console.log(city);
+console.log(username);
+
+document.addEventListener("DOMContentLoaded", async function () {
+  // call askName(()
+  /*
+  if (username === null){
+  let username = prompt("please enter your name.");
+  }
+  greeting.textContent = `Hello, ${username}`
+}
+
+let cityLocal = localStorage.getItem("city");
+
+
+// EVENT LISTENER BUTTON CLICK {
+// call is isCityLStorage()
+if (cityLocal.value === null) {
+let cityLocal = city.value;
+let c = celsius;
+let f = fahrenheit;
+}
+
+}
+*/
+});
 
 //FUNCTIONS
 // localStorage Functions
@@ -31,13 +55,13 @@ function saveSessionStorage(id) {
 }
 
 // cookies Functions
-function saveCookie(id) {
+function saveCookie(key, id) {
   let data = document.getElementById(id).value;
-  document.cookie = `myCookie=${data}; max-age=300`;
+  document.cookie = `${key}=${data}; max-age=300`;
 }
-function getCookie() {
+function getCookie(key) {
   const cookies = document.cookie;
-  username.value = cookies.substring(9);
+  key.value = cookies.substring(9);
 }
 function clearCookies(id) {
   document.cookie = "myCookie=; max-age=300";
