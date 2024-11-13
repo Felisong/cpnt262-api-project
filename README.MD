@@ -27,11 +27,22 @@ I will be adding more to this later. I am just creating this so I can start work
 
 - [dev.tp](https://dev.to/alexmercedcoder/making-multiple-api-calls-in-javascript-kip)
 
+- [perplexity.ai](https://www.perplexity.ai) for specific questions on specific pieces of code.
+
 https://icon-sets.iconify.design/hugeicons/celsius/
 
 https://icon-sets.iconify.design/hugeicons/fahrenheit/
 
 ## Psuedo Code
+
+// VARIABLES
+const city = document.getElementById("city");
+const celsius = document.getElementById("celsius");
+const fahrenheit = document.getElementById("fahrenheit");
+const submitBtn = document.querySelector(".btn");
+// variables to make interact
+const weatherList = document.getElementById("data-list");
+const temperature = document.getElementById("temperature-data");
 
 // API call
 const weatherApi = `http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${weatherApiKey}`;
@@ -42,15 +53,6 @@ const weatherApiKey = `personalized webkey`;
 // API Key for geo
 // https://openweathermap.org/api/geocoding-api
 // get this api working as well so i can enter the city and it gets the co-ordinates for the weather map
-
-// VARIABLES
-const city = document.getElementById("city");
-const celsius = document.getElementById("celsius");
-const fahrenheit = document.getElementById("fahrenheit");
-const submitBtn = document.querySelector(".btn");
-// variables to make interact
-const weatherList = document.getElementById("data-list");
-const temperature = document.getElementById("temperature-data");
 
 // GETTING AND PLACING DATA FROM API
 document.addEventListener("DOMContentLoaded", async function getData() {

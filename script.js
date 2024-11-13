@@ -6,20 +6,20 @@ const submitBtn = document.querySelector(".btn");
 // variables to make interact
 const weatherList = document.getElementById("data-list");
 const temperature = document.getElementById("temperature-data");
-let lat = 51;
-let lon = 114;
-let cityName = `calgary`;
-
-// API key
-const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
-// API call
-const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
 // GETTING AND PLACING DATA FROM API
 document.addEventListener("DOMContentLoaded", async function () {
   let weatherData;
   let geoData;
+  let lat;
+  let lon;
+  let cityName = `edmonton`;
+
+  // API key
+  const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
+  // API call
+  const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
   try {
     // fetching api data
@@ -31,9 +31,18 @@ document.addEventListener("DOMContentLoaded", async function () {
       weatherList.innerHTML = `<p> unable to fetch data. Please try again later</p>`;
       return;
     }
-    // make data into arrays
-    console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
+    // make data into something I can see
+    // console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
     console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
+
+    // first geocoder
+    // then i need to give value from those
+
+    lon = geoData.coord["lon"];
+    lat = geoData.coord["lat"];
+    cityName = geoData.name;
+    console.log(cityName);
+
     // inside the data if it loads, can stylize or add in here
 
     //
