@@ -7,8 +7,7 @@ const greeting = document.querySelector(".header-Intro");
 const temperatureData = document.querySelector(".temperature-data-container");
 // Local storage/ cookie variables if available.
 let cityLocal = sessionStorage.getItem("city");
-let c = getCookie("celsius");
-let f = getCookie("fahrenheit");
+let unit;
 let username = localStorage.getItem("username");
 
 // loose
@@ -16,8 +15,6 @@ let geodata;
 let weatherData;
 let lat;
 let lon;
-let unit;
-let tempUnit;
 // API key
 const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 // // API call
@@ -34,20 +31,25 @@ document.addEventListener("DOMContentLoaded", async function () {
   // EVENT LISTENER BUTTON CLICK {
   submitBtn.addEventListener("click", function () {
     // radio
+    // make into function?
     if (celsius.checked) {
       unit = "metric";
     } else if (fahrenheit.checked) {
       unit = "imperial";
+    } else {
+      unit = "metric";
+      celsius.checked = true;
     }
+    console.log(`unit before cookie = ` + unit);
     saveSessionStorage("city");
     saveCookie("unit", unit);
+    getCookie("unit");
+    unit = unit.value;
+    console.log(`unit after cookie = ` + unit);
   });
 
-  console.log(`checking: ${unit}`);
   // // update values / keeps if they were already there.
   cityLocal = sessionStorage.getItem("city");
-  c = getCookie("prefC");
-  f = getCookie("prefF");
 
   // FETCH GEO API
   try {
@@ -125,31 +127,16 @@ function saveSessionStorage(id) {
 }
 
 // cookies Functions
-function saveCookie(key, id) {
-  let data = document.getElementById(id).value;
+function saveCookie(key, value) {
+  let data = value;
   document.cookie = `${key}=${data}; max-age=300`;
 }
 
-// took from w3 schools, but adjusted and commented
-function getCookie(temp) {
-  // to find the key of the cookie
-  let name = temp + "=";
-
-  let ca = document.cookie.split(";");
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-
-    // get substring by getting length of key = , until end of length.
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
 function clearCookies(id) {
   document.cookie = "myCookie=; max-age=300";
   document.getElementById(id).innerText = "No data stored.";
+}
+function getCookie(key) {
+  const cookies = document.cookie;
+  key.value = cookies.substring(4);
 }
