@@ -32,11 +32,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   console.log(`checking: ${username}`);
   // EVENT LISTENER BUTTON CLICK {
   submitBtn.addEventListener("click", function () {
-    // saving inputs, and assigning value to variables for use.
-    // function saveLocalStorage("city");
-    // function saveSessionStorage("celsius");
-    // function saveSessionStorage("celsius");
-    // // end of button?
+    saveSessionStorage("city");
+    saveCookie("celsius", "celsius");
+    saveCookie("fahrenheit", "fahrenheit");
   });
 
   // // update values / keeps if they were already there.
