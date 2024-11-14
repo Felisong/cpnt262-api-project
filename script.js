@@ -27,8 +27,9 @@ const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&l
 document.addEventListener("DOMContentLoaded", async function () {
   // Only prompt if username is null or undefined
   greetings();
+
   unit = document.cookie.substring(5) || "metric";
-  // TO DO LATER FIND WHY UNIT IS NULL AND NOT GETTING ANYTHING CHECKED
+
   // EVENT LISTENER BUTTON CLICK {
   submitBtn.addEventListener("click", function () {
     // radio : if celsius is checked, unit = metric, otherwise (fahrenheit) unit = "imperial". unit is set to default on metric.
@@ -53,20 +54,32 @@ document.addEventListener("DOMContentLoaded", async function () {
     //  Value to fetch api
     lat = geoData.coord["lat"];
     lon = geoData.coord["lon"];
-    console.log(`experiment= ` + unit);
+    // console.log(`experiment= ` + unit);
 
-    // TRY FETCH {
+    // TRY FETCH with values I now have.
     try {
       weatherData = await fetchData(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
       );
+      unit = "metric" ? (unit = "°C") : (unit = "°F");
       // error in case api is empty
       if (weatherData === 0) {
         throw new erorr(error.message);
         return;
       }
-      //      // make data into something I can see
-      console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
+      // make data into something I can see
+      // console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
+      // make into function later
+      temperatureData;
+      console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
+
+      weatherData.forEach((weather) => {
+        const div = document.createElement("div");
+        const p = document.createElement("p");
+        p.textContent = weatherData.weather;
+        div.appendChild(p);
+        temperatureData.appendChild(div);
+      });
 
       //      // create forEach() to show data for primitively
       //      {
