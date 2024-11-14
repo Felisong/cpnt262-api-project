@@ -30,19 +30,25 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Only prompt if username is null or undefined
   greetings();
 
+  // TO DO LATER FIND WHY UNIT IS NULL AND NOT GETTING ANYTHING CHECKED
   // EVENT LISTENER BUTTON CLICK {
   submitBtn.addEventListener("click", function () {
+    // radio
+    if (celsius.checked) {
+      unit = "metric";
+    } else if (fahrenheit.checked) {
+      unit = "imperial";
+    }
     saveSessionStorage("city");
-    saveCookie("prefC", "celsius");
-    saveCookie("prefF", "fahrenheit");
+    saveCookie("unit", unit);
   });
 
+  console.log(`checking: ${unit}`);
   // // update values / keeps if they were already there.
   cityLocal = sessionStorage.getItem("city");
   c = getCookie("prefC");
   f = getCookie("prefF");
 
-  console.log(`checking: ${f}`);
   // FETCH GEO API
   try {
     geoData = await fetchData(geoApi);
@@ -55,24 +61,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     //     //value to fetch api
     lat = geoData.coord["lat"];
     lon = geoData.coord["lon"];
+    // if both  name and value = 'celsius' it will go metric if true, imperial if false.
 
-    // checkedRad = document.querySelector(
-    //   `input[name=${"preferred-temp-unit"}]:checked`
-    // );
-    //     // TO SELECT C OR F IN DATA.
-    // // switch ()
-    // case `fahrenheit` {
-    // unit = `imperial`}
-    // case `celsius` {
-    // unit = `metric`}
-    // switch(celsius || fahrenheit) {
-    //   case 'fahrenheit':
-    //     unit = `imperial`;
-    //     break ;
-    //   case 'celsius':
-
-    // }
-    // ;
     //     // TRY FETCH {
     //     weatherData= await fetchData(weatherApi);
     //     // error in case api is empty
