@@ -51,19 +51,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     //  VALUE FOR WEATHER API
     let lat = geoData.coord["lat"];
     let lon = geoData.coord["lon"];
-    // console.log(`experiment= ` + unit);
+    console.log(`experiment= ` + unit);
 
     // TRY FETCH WEATHER with values I now have.
     try {
       weatherData = await fetchData(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
       );
-      unit = "metric" ? (unit = "°C") : (unit = "°F");
       // error in case api is empty
       if (weatherData === 0) {
         throw new erorr(error.message);
         return;
       }
+      if (unit === "imperial") {
+        unit = "°F";
+      } else {
+        unit = "°C";
+      }
+
+      console.log(unit);
       // temperatureData; is the container for the data
       // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
       // console.log(weatherData);
@@ -86,13 +92,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       const country = weatherData.sys.country;
       const currentCity = weatherData.name;
 
-      console.log(currentWind);
+      console.log(weatherData);
       // DOM MANIPULATION
       whichCity.textContent = `${currentCity}`;
       whichCountry.textContent = `${country}`;
       currentTemperature.textContent = `${currentTemp}${unit} `;
       currentFeelsLike.textContent = `Feels Like: ${feelsLike}${unit}`;
-      currentHumidity.textContent = `Humidity:${humidity}%`;
+      currentHumidity.textContent = `Humidity: ${humidity}%`;
       // console.log(`typeof test: ${typeof weatherTrigger}`);
       // console.log(`weather Trigger: ${JSON.stringify(weatherData)}`);
 
