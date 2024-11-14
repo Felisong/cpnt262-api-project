@@ -17,6 +17,7 @@ let weatherData;
 let lat;
 let lon;
 let unit;
+let tempUnit;
 // API key
 const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 // // API call
@@ -42,46 +43,56 @@ document.addEventListener("DOMContentLoaded", async function () {
   f = getCookie("prefF");
 
   console.log(`checking: ${f}`);
-  // // console log to check values later
-  // // FETCH GEO API
-  //   try {
-  //     geoData = await fetchData(geoApi);
-  //     // error in case api is empty
-  //     if (geoData === 0) {
-  //       throw new erorr(error.message)
-  //       return;
-  //     }
-  //     // make data into something I can see
-  //     // console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
-  //     console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
-  //     //value to fetch api
-  //     let lan = weather.path to lang
-  //     let lon = weather. path to lon
-  //     // TO SELECT C OR F IN DATA.
-  // // switch ()
-  // case `fahrenheit` {
-  // unit = `imperial`}
-  // case `celsius` {
-  // unit = `metric`}
-  // ;
-  //     // TRY FETCH {
-  //     weatherData= await fetchData(weatherApi);
-  //     // error in case api is empty
-  //     if (weatherData === 0) {
-  //       throw new erorr(error.message)
-  //       return;
-  //     }
-  //      // make data into something I can see
-  //      // create forEach() to show data for primitively
-  //      {
-  //      const data = document.createElement = "div"
-  //      // give classname to element
-  //      // fit content of width/ height
-  //      // appendChild to temperatureData container
-  //      // see the basics of how it looks then stylize.
-  //      }
-  //   } catch (error) {
-  //     console.log(`Error fetching data` > error);
+  // FETCH GEO API
+  try {
+    geoData = await fetchData(geoApi);
+    // error in case api is empty
+    if (geoData === 0) {
+      throw new erorr(error.message);
+      return;
+    }
+    // console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
+    //     //value to fetch api
+    lat = geoData.coord["lat"];
+    lon = geoData.coord["lon"];
+
+    // checkedRad = document.querySelector(
+    //   `input[name=${"preferred-temp-unit"}]:checked`
+    // );
+    //     // TO SELECT C OR F IN DATA.
+    // // switch ()
+    // case `fahrenheit` {
+    // unit = `imperial`}
+    // case `celsius` {
+    // unit = `metric`}
+    // switch(celsius || fahrenheit) {
+    //   case 'fahrenheit':
+    //     unit = `imperial`;
+    //     break ;
+    //   case 'celsius':
+
+    // }
+    // ;
+    //     // TRY FETCH {
+    //     weatherData= await fetchData(weatherApi);
+    //     // error in case api is empty
+    //     if (weatherData === 0) {
+    //       throw new erorr(error.message)
+    //       return;
+    //     }
+    //      // make data into something I can see
+    // console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
+    //      // create forEach() to show data for primitively
+    //      {
+    //      const data = document.createElement = "div"
+    //      // give classname to element
+    //      // fit content of width/ height
+    //      // appendChild to temperatureData container
+    //      // see the basics of how it looks then stylize.
+    //  }
+  } catch (error) {
+    console.log(`Error fetching data` > error);
+  }
 });
 
 //FUNCTIONS
@@ -103,7 +114,7 @@ function greetings() {
 // fetch API
 const fetchData = async (url) => {
   const response = await fetch(url);
-  console.log("response:", response);
+  // console.log("response:", response);
   const data = await response.json();
   return data;
 };
@@ -128,10 +139,6 @@ function saveCookie(key, id) {
   let data = document.getElementById(id).value;
   document.cookie = `${key}=${data}; max-age=300`;
 }
-// function getCookie(key) {
-//   const cookies = document.cookie;
-//   key.value = cookies.substring();
-// }
 
 // took from w3 schools, but adjusted and commented
 function getCookie(temp) {
