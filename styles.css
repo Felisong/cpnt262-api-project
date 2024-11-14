@@ -43,6 +43,19 @@ header {
   width: 60vw;
   height: fit-content;
 }
+.city-and-temp {
+  display: flex;
+  align-items: center;
+}
+.current-temp {
+  margin-left: 4rem;
+}
+.text-section {
+  text-align: center;
+}
+.details {
+  margin: 1rem;
+}
 .input-container {
   display: flex;
   flex-direction: column;
@@ -80,7 +93,7 @@ h2 {
   font-size: clamp(1.5rem, 2rem, 3rem);
 }
 h3 {
-  margin-top: 2rem;
+  margin-top: rem;
   margin-bottom: 0;
   font-family: "Julius Sans One";
 }

@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
       // temperatureData; is the container for the data
       // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
+      console.log(weatherData);
 
       // variables I want
       const weatherMain = weatherData.weather;
@@ -76,15 +77,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       const humidity = weatherData.main.humidity;
       const wind = weatherData.wind.speed;
       const country = weatherData.sys.country;
+      const currentCity = weatherData.name;
 
-      weatherArr = [];
-
-      for (const property in weatherData) {
-        console.log(` ${property} : ${weatherData}`);
-      }
+      console.log(currentCity);
 
       // console.log(`typeof test: ${typeof weatherTrigger}`);
-      console.log(`weather Trigger: ${JSON.stringify(weatherData)}`);
+      // console.log(`weather Trigger: ${JSON.stringify(weatherData)}`);
 
       //      const data = document.createElement = "div"
       //      // give classname to element
