@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
       // temperatureData; is the container for the data
       // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
-      console.log(weatherData);
+      // console.log(weatherData);
 
       // variables I want
       // elements I am manipulating
@@ -78,18 +78,21 @@ document.addEventListener("DOMContentLoaded", async function () {
       const currentWind = document.querySelector(".wind-speed");
 
       //variables from data.
-      const weatherMain = weatherData.weather;
-      const weatherId = weatherMain[0].id;
-      const weatherTrigger = weatherMain[0].main;
+      const weatherId = weatherData.weather[0].id;
+      const weatherTrigger = weatherData.weather[0].main;
       const currentTemp = weatherData.main.temp;
       const feelsLike = weatherData.main.feels_like;
       const humidity = weatherData.main.humidity;
-      const wind = weatherData.wind.speed;
       const country = weatherData.sys.country;
       const currentCity = weatherData.name;
 
       console.log(currentWind);
-
+      // DOM MANIPULATION
+      whichCity.textContent = `${currentCity}`;
+      whichCountry.textContent = `${country}`;
+      currentTemperature.textContent = `${currentTemp}${unit} `;
+      currentFeelsLike.textContent = `Feels Like: ${feelsLike}${unit}`;
+      currentHumidity.textContent = `Humidity:${humidity}%`;
       // console.log(`typeof test: ${typeof weatherTrigger}`);
       // console.log(`weather Trigger: ${JSON.stringify(weatherData)}`);
 
