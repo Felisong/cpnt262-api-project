@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   unit = document.cookie.substring(5) || "metric";
 
   // EVENT LISTENER BUTTON CLICK {
+  // saves all inputs.
   submitBtn.addEventListener("click", function () {
-    // radio : if celsius is checked, unit = metric, otherwise (fahrenheit) unit = "imperial". unit is already set to default on metric.
     unit = celsius.checked ? "metric" : "imperial";
     saveSessionStorage("city");
     saveCookie("unit", unit);
@@ -64,23 +64,28 @@ document.addEventListener("DOMContentLoaded", async function () {
         throw new erorr(error.message);
         return;
       }
-      // make data into something I can see
-      // console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
-      // make into function later
       // temperatureData; is the container for the data
-      console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
+      // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
 
-      weatherObject = JSON.stringify(weatherData);
+      // variables I want
+      const weatherMain = weatherData.weather;
+      const weatherId = weatherMain[0].id;
+      const weatherTrigger = weatherMain[0].main;
+      const currentTemp = weatherData.main.temp;
+      const feelsLike = weatherData.main.feels_like;
+      const humidity = weatherData.main.humidity;
+      const wind = weatherData.wind.speed;
+      const country = weatherData.sys.country;
 
-      let card = document.createElement("div");
-      let text = document.createElement("p");
+      weatherArr = [];
 
-      text.textContent = weatherObject;
+      for (const property in weatherData) {
+        console.log(` ${property} : ${weatherData}`);
+      }
 
-      card.appendChild(text);
-      temperatureData.appendChild(card);
-      //      // create forEach() to show data for primitively
-      //      {
+      // console.log(`typeof test: ${typeof weatherTrigger}`);
+      console.log(`weather Trigger: ${JSON.stringify(weatherData)}`);
+
       //      const data = document.createElement = "div"
       //      // give classname to element
       //      // fit content of width/ height
