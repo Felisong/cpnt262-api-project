@@ -1,5 +1,6 @@
 // VARIABLES
 const city = document.getElementById("city");
+const radio = document.querySelector("radio-container");
 const celsius = document.getElementById("celsius");
 const fahrenheit = document.getElementById("fahrenheit");
 const submitBtn = document.querySelector(".btn");
@@ -26,28 +27,20 @@ const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&l
 document.addEventListener("DOMContentLoaded", async function () {
   // Only prompt if username is null or undefined
   greetings();
-
+  unit = document.cookie.substring(5) || "metric";
   // TO DO LATER FIND WHY UNIT IS NULL AND NOT GETTING ANYTHING CHECKED
   // EVENT LISTENER BUTTON CLICK {
   submitBtn.addEventListener("click", function () {
-    // radio
-    // make into function?
-    if (celsius.checked) {
-      unit = "metric";
-    } else if (fahrenheit.checked) {
-      unit = "imperial";
-    } else {
-      unit = "metric";
-      celsius.checked = true;
-    }
+    // radio : if celsius is checked, unit = metric, otherwise (fahrenheit) unit = "imperial".
+    unit = celsius.checked ? "metric" : "imperial";
     console.log(`unit before cookie = ` + unit);
     saveSessionStorage("city");
     saveCookie("unit", unit);
-    getCookie("unit");
-    unit = unit.value;
-    console.log(`unit after cookie = ` + unit);
   });
+  const cookies = document.cookie;
+  unit = cookies.substring(5) || "metric";
 
+  console.log(`experiment= ` + unit);
   // // update values / keeps if they were already there.
   cityLocal = sessionStorage.getItem("city");
 
@@ -140,3 +133,5 @@ function getCookie(key) {
   const cookies = document.cookie;
   key.value = cookies.substring(4);
 }
+
+// GET TEMPERATURE UNIT WORKING AS INTENDED. ITS BREAKING RIGHT AFTER GET COOKIE WITH CONSOLE LOGS
