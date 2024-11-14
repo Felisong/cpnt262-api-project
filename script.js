@@ -69,6 +69,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.log(weatherData);
 
       // variables I want
+      // elements I am manipulating
+      const whichCity = document.querySelector(".current-city");
+      const whichCountry = document.querySelector(".current-country");
+      const currentTemperature = document.querySelector(".current-temp");
+      const currentFeelsLike = document.querySelector(".feels-like");
+      const currentHumidity = document.querySelector(".humidity");
+      const currentWind = document.querySelector(".wind-speed");
+
+      //variables from data.
       const weatherMain = weatherData.weather;
       const weatherId = weatherMain[0].id;
       const weatherTrigger = weatherMain[0].main;
@@ -79,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       const country = weatherData.sys.country;
       const currentCity = weatherData.name;
 
-      console.log(currentCity);
+      console.log(currentWind);
 
       // console.log(`typeof test: ${typeof weatherTrigger}`);
       // console.log(`weather Trigger: ${JSON.stringify(weatherData)}`);
