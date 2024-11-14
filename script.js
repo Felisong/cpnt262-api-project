@@ -31,17 +31,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   // TO DO LATER FIND WHY UNIT IS NULL AND NOT GETTING ANYTHING CHECKED
   // EVENT LISTENER BUTTON CLICK {
   submitBtn.addEventListener("click", function () {
-    // radio : if celsius is checked, unit = metric, otherwise (fahrenheit) unit = "imperial".
+    // radio : if celsius is checked, unit = metric, otherwise (fahrenheit) unit = "imperial". unit is set to default on metric.
     unit = celsius.checked ? "metric" : "imperial";
-    console.log(`unit before cookie = ` + unit);
     saveSessionStorage("city");
     saveCookie("unit", unit);
   });
-  const cookies = document.cookie;
-  unit = cookies.substring(5) || "metric";
 
-  console.log(`experiment= ` + unit);
-  // // update values / keeps if they were already there.
+  // UPDATED VALUES
+  unit = document.cookie.substring(5) || "metric";
   cityLocal = sessionStorage.getItem("city");
 
   // FETCH GEO API
@@ -53,28 +50,35 @@ document.addEventListener("DOMContentLoaded", async function () {
       return;
     }
     // console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
-    //     //value to fetch api
+    //  Value to fetch api
     lat = geoData.coord["lat"];
     lon = geoData.coord["lon"];
-    // if both  name and value = 'celsius' it will go metric if true, imperial if false.
+    console.log(`experiment= ` + unit);
 
-    //     // TRY FETCH {
-    //     weatherData= await fetchData(weatherApi);
-    //     // error in case api is empty
-    //     if (weatherData === 0) {
-    //       throw new erorr(error.message)
-    //       return;
-    //     }
-    //      // make data into something I can see
-    // console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
-    //      // create forEach() to show data for primitively
-    //      {
-    //      const data = document.createElement = "div"
-    //      // give classname to element
-    //      // fit content of width/ height
-    //      // appendChild to temperatureData container
-    //      // see the basics of how it looks then stylize.
-    //  }
+    // TRY FETCH {
+    try {
+      weatherData = await fetchData(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
+      );
+      // error in case api is empty
+      if (weatherData === 0) {
+        throw new erorr(error.message);
+        return;
+      }
+      //      // make data into something I can see
+      console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
+
+      //      // create forEach() to show data for primitively
+      //      {
+      //      const data = document.createElement = "div"
+      //      // give classname to element
+      //      // fit content of width/ height
+      //      // appendChild to temperatureData container
+      //      // see the basics of how it looks then stylize.
+      //  }
+    } catch (error) {
+      console.log(`Error fetching data` > error);
+    }
   } catch (error) {
     console.log(`Error fetching data` > error);
   }
