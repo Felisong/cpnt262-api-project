@@ -12,7 +12,7 @@ let unit;
 let username = localStorage.getItem("username");
 
 // loose
-let geodata;
+let geoData;
 let weatherData;
 let lat;
 let lon;
@@ -22,8 +22,6 @@ const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
-// console.log(`current:${username}`);
-
 document.addEventListener("DOMContentLoaded", async function () {
   // Only prompt if username is null or undefined
   greetings();
@@ -32,12 +30,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // EVENT LISTENER BUTTON CLICK {
   submitBtn.addEventListener("click", function () {
-    // radio : if celsius is checked, unit = metric, otherwise (fahrenheit) unit = "imperial". unit is set to default on metric.
+    // radio : if celsius is checked, unit = metric, otherwise (fahrenheit) unit = "imperial". unit is already set to default on metric.
     unit = celsius.checked ? "metric" : "imperial";
     saveSessionStorage("city");
     saveCookie("unit", unit);
   });
-
   // UPDATED VALUES
   unit = document.cookie.substring(5) || "metric";
   cityLocal = sessionStorage.getItem("city");
@@ -51,12 +48,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       return;
     }
     // console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
-    //  Value to fetch api
-    lat = geoData.coord["lat"];
-    lon = geoData.coord["lon"];
+    //  VALUE FOR WEATHER API
+    let lat = geoData.coord["lat"];
+    let lon = geoData.coord["lon"];
     // console.log(`experiment= ` + unit);
 
-    // TRY FETCH with values I now have.
+    // TRY FETCH WEATHER with values I now have.
     try {
       weatherData = await fetchData(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
@@ -70,17 +67,18 @@ document.addEventListener("DOMContentLoaded", async function () {
       // make data into something I can see
       // console.log(`weather response: ` + JSON.stringify(weatherData, null, 2));
       // make into function later
-      temperatureData;
+      // temperatureData; is the container for the data
       console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
 
-      weatherData.forEach((weather) => {
-        const div = document.createElement("div");
-        const p = document.createElement("p");
-        p.textContent = weatherData.weather;
-        div.appendChild(p);
-        temperatureData.appendChild(div);
-      });
+      weatherObject = JSON.stringify(weatherData);
 
+      let card = document.createElement("div");
+      let text = document.createElement("p");
+
+      text.textContent = weatherObject;
+
+      card.appendChild(text);
+      temperatureData.appendChild(card);
       //      // create forEach() to show data for primitively
       //      {
       //      const data = document.createElement = "div"
@@ -96,6 +94,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log(`Error fetching data` > error);
   }
 });
+// OPTIMIZATIONS
+// get cookie fix to make it simple. I use it 3 times.
 
 //FUNCTIONS
 
@@ -113,6 +113,7 @@ function greetings() {
     greeting.textContent = `Hello, Stranger!`;
   }
 }
+
 // fetch API
 const fetchData = async (url) => {
   const response = await fetch(url);
