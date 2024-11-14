@@ -23,24 +23,25 @@ const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
-console.log(`current:${username}`);
+// console.log(`current:${username}`);
 
 document.addEventListener("DOMContentLoaded", async function () {
   // Only prompt if username is null or undefined
   greetings();
 
-  console.log(`checking: ${username}`);
   // EVENT LISTENER BUTTON CLICK {
   submitBtn.addEventListener("click", function () {
     saveSessionStorage("city");
-    saveCookie("celsius", "celsius");
-    saveCookie("fahrenheit", "fahrenheit");
+    saveCookie("prefC", "celsius");
+    saveCookie("prefF", "fahrenheit");
   });
 
   // // update values / keeps if they were already there.
-  // cityLocal = localStorage.getItem("city");
-  // c = sessionStorage.getItem("celsius");
-  // f = sessionStorage.getItem("fahrenheit");
+  cityLocal = sessionStorage.getItem("city");
+  c = getCookie("prefC");
+  f = getCookie("prefF");
+
+  console.log(`checking: ${f}`);
   // // console log to check values later
   // // FETCH GEO API
   //   try {
@@ -127,9 +128,29 @@ function saveCookie(key, id) {
   let data = document.getElementById(id).value;
   document.cookie = `${key}=${data}; max-age=300`;
 }
-function getCookie(key) {
-  const cookies = document.cookie;
-  key.value = cookies.substring(9);
+// function getCookie(key) {
+//   const cookies = document.cookie;
+//   key.value = cookies.substring();
+// }
+
+// took from w3 schools, but adjusted and commented
+function getCookie(temp) {
+  // to find the key of the cookie
+  let name = temp + "=";
+
+  let ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+
+    // get substring by getting length of key = , until end of length.
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 function clearCookies(id) {
   document.cookie = "myCookie=; max-age=300";
