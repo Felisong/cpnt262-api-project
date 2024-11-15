@@ -8,7 +8,7 @@ const greeting = document.querySelector(".header-Intro");
 const saveBtn = document.querySelector(".save-name");
 const saveName = document.getElementById("user-name");
 // Local storage/ cookie variables if available.
-let cityLocal = localStorage.getItem("city");
+let cityLocal = localStorage.getItem("city") || "calgary";
 let unit = sessionStorage.getItem("unit");
 let username = getCookie("username") || null;
 
@@ -25,11 +25,8 @@ const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
-console.log(localStorage.getItem("city"));
-
 document.addEventListener("DOMContentLoaded", async function () {
   saveBtn.addEventListener("click", function () {
-    // if true. run code.
     if (saveName.value) {
       username = saveName.value;
       saveCookie("username", username);
@@ -52,17 +49,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   unit = sessionStorage.getItem("unit") || "metric";
   cityLocal = getMostRecentCity() || "calgary";
 
+  // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
-  // make into function later
-  let previousCities = document.createElement("h3");
-  previousCities.textContent = "Previously Searched.";
-  document.getElementById("cities").appendChild(previousCities);
-  previousCities.style.textAlign = "center";
   cityArr.forEach((element) => {
     let container = document.createElement("div");
     container.className = "grid-button";
     let button = document.createElement("button");
-    button.className = "btn";
+    button.className = "btn-city";
     let text = document.createElement("p");
     text.textContent = element;
     button.appendChild(text);
@@ -197,5 +190,3 @@ function getMostRecentCity() {
   let cities = getCities();
   return cities.length > 0 ? cities[cities.length - 1] : null;
 }
-
-//
