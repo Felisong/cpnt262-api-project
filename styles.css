@@ -11,7 +11,7 @@ body {
   padding: 0;
   width: 100vw;
   min-height: 100vh;
-  background: linear-gradient(#73b7d6, var(--background-color));
+  background-color: var(--background-color);
   color: var(--text-color);
   font-family: "Hind Guntur";
 }
@@ -99,6 +99,9 @@ input {
 .btn-city:hover {
   transform: scale(1.1);
 }
+.btn-city:active {
+  background-color: white;
+}
 /*  header and temperature */
 h2 {
   margin: 0;
@@ -144,3 +147,54 @@ p {
   .temp-container {
     width: 400px;
   }
+}
+
+/* DIFFERENT COLORS FOR CONDITIONS */
+/* thunder storm colors */
+.thunder-storm {
+  background-color: #181717;
+  color: white;
+}
+.thunder-storm .temp-container {
+  background-color: #414040;
+}
+.light-rain {
+  background-color: #414040;
+  color: white;
+}
+.light-rain .temp-container {
+  background-color: #49575c;
+}
+.snow {
+  background-color: #1f2b3f;
+  color: white;
+}
+.snow h1 {
+  color: white;
+}
+.snow .temp-container,
+.input-container {
+  background-color: rgb(215, 215, 250);
+  color: black;
+}
+.grey-haze {
+  background-color: #7695af;
+  color: white;
+}
+.grey-haze .temp-container,
+.input-container {
+}
+.red-grey {
+  background-color: #7695af;
+  color: white;
+}
+.red-grey .temp-container,
+.input-container {
+}
+.cloudy {
+  background-color: #000000;
+  color: white;
+}
+.cloudy .temp-container,
+.input-container {
+}
