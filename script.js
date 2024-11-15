@@ -8,8 +8,8 @@ const greeting = document.querySelector(".header-Intro");
 const saveBtn = document.querySelector(".save-name");
 const saveName = document.getElementById("user-name");
 // Local storage/ cookie variables if available.
-let cityLocal = localStorage.getItem("city") || "calgary" || "calgary";
-let unit = sessionStorage.getItem("unit");
+let cityLocal = localStorage.getItem("city") || "calgary";
+let unit = sessionStorage.getItem("unit") || "metric";
 let username = getCookie("username") || null;
 
 // loose
@@ -25,6 +25,7 @@ const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&a
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
 document.addEventListener("DOMContentLoaded", async function () {
+  // save username
   saveBtn.addEventListener("click", function () {
     if (saveName.value) {
       username = saveName.value;
@@ -37,18 +38,21 @@ document.addEventListener("DOMContentLoaded", async function () {
   username = document.cookie.substring(9);
   greeting.textContent = `Hello, ${username}!`;
   unit = sessionStorage.getItem("unit") || "metric";
+
   // SUBMIT BUTTON GATHER DATA.
   submitBtn.addEventListener("click", function () {
     unit = celsius.checked ? "metric" : "imperial";
     addCity(city.value);
     sessionStorage.setItem("unit", unit);
   });
+
   // UPDATED VALUES
   unit = sessionStorage.getItem("unit") || "metric";
   cityLocal = getMostRecentCity() || "calgary";
 
   // FETCH GEO API
   loadCityData();
+
   // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
   if (cityArr !== null) {
@@ -56,6 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     title.textContent = "Previously Searched";
     document.getElementById("cities").appendChild(title);
   }
+  // showing previous cities as button.
   cityArr.forEach((element) => {
     let container = document.createElement("div");
     container.className = "grid-button";
@@ -179,7 +184,6 @@ async function loadCityData() {
       const condition = document.querySelector(".descript");
 
       //variables from data.
-      const weatherId = weatherData.weather[0].id;
       const weatherdesc = weatherData.weather[0].description;
       const currentTemp = weatherData.main.temp;
       const feelsLike = weatherData.main.feels_like;
