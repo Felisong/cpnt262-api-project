@@ -31,8 +31,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       username = saveName.value;
       saveCookie("username", username);
       greeting.textContent = `Hello, ${username}!`;
-    } else {
-      greeting.textContent = `Hello, Stranger!`;
     }
   });
   // updated variables for use later + dom manipulation. (greeting to user)
@@ -154,7 +152,7 @@ async function loadCityData() {
       throw new erorr(error.message);
       return;
     }
-    // console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
+    console.log(`geocoder response: ` + JSON.stringify(geoData));
     //  VALUE FOR WEATHER API
     let lat = geoData.coord["lat"];
     let lon = geoData.coord["lon"];

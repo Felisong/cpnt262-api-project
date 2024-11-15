@@ -137,9 +137,6 @@ unit = `metric`}
 console.log(`Error fetching data` > error);
 }
 });
-}
-\*/
-});
 
 //FUNCTIONS
 
