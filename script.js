@@ -49,8 +49,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   cityLocal = getMostRecentCity() || "calgary";
 
   // get data from localStorage as an array, then create element for each.
-  // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
+  if (cityArr !== null) {
+    let title = document.createElement("h3");
+    title.textContent = "Previously Searched";
+    document.getElementById("cities").appendChild(title);
+  }
   cityArr.forEach((element) => {
     let container = document.createElement("div");
     container.className = "grid-button";
