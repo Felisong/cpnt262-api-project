@@ -54,14 +54,20 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const cityArr = getCities();
   // make into function later
+  let previousCities = document.createElement("h3");
+  previousCities.textContent = "Previously Searched.";
+  document.getElementById("cities").appendChild(previousCities);
+  previousCities.style.textAlign = "center";
   cityArr.forEach((element) => {
-    let card = document.createElement("div");
-    card.className = "city-card";
+    let card = document.createElement("button");
+    card.className = "btn";
     let text = document.createElement("p");
     text.textContent = element;
     text.style.display;
     card.appendChild(text);
     document.getElementById("cities").appendChild(card);
+    //
+    cityLocal = element;
   });
 
   // FETCH GEO API
