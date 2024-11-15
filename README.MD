@@ -30,7 +30,6 @@ it works once you fill out the form with a city. Please provide your name in the
 - [perplexity.ai](https://www.perplexity.ai) for guidance when I could not find documentation related, or for issues troubleshooting.
 
 - [stackoverflow.com](https://stackoverflow.com/)
-  -specifically [this one](https://stackoverflow.com/questions/58211513/how-can-i-display-a-javascript-prompt-once-on-website-load)
 
 ## Psuedo Code
 
