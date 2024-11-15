@@ -8,7 +8,7 @@ const greeting = document.querySelector(".header-Intro");
 const saveBtn = document.querySelector(".save-name");
 const saveName = document.getElementById("user-name");
 // Local storage/ cookie variables if available.
-let cityLocal = localStorage.getItem("city") || "calgary";
+let cityLocal = localStorage.getItem("city") || "calgary" || "calgary";
 let unit = sessionStorage.getItem("unit");
 let username = getCookie("username") || null;
 
@@ -50,16 +50,24 @@ document.addEventListener("DOMContentLoaded", async function () {
   cityLocal = getMostRecentCity() || "calgary";
 
   // get data from localStorage as an array, then create element for each.
+  // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
-  // make into function later
   cityArr.forEach((element) => {
+    let container = document.createElement("div");
+    container.className = "grid-button";
+    let button = document.createElement("button");
+    button.className = "btn-city";
     let card = document.createElement("div");
     card.className = "btn-city";
     let text = document.createElement("p");
     text.textContent = element;
-    text.style.display;
-    card.appendChild(text);
-    document.getElementById("cities").appendChild(card);
+    button.appendChild(text);
+    container.appendChild(button);
+
+    document.getElementById("cities").appendChild(container);
+
+    //
+    cityLocal = element;
   });
 
   // FETCH GEO API
