@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       greeting.textContent = `Hello, Stranger!`;
     }
   });
+  // updated variables for use later + dom manipulation. (greeting to user)
   username = document.cookie.substring(9);
   greeting.textContent = `Hello, ${username}!`;
   unit = sessionStorage.getItem("unit") || "metric";
@@ -79,14 +80,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       } else {
         tempPref = "°C";
       }
-
-      console.log(tempPref);
-      // temperatureData; is the container for the data
       // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
-      // console.log(weatherData);
-
-      // variables I want
-      // elements I am manipulating
+      // VARIABLES
       const whichCity = document.querySelector(".current-city");
       const whichCountry = document.querySelector(".current-country");
       const currentTemperature = document.querySelector(".current-temp");
@@ -109,12 +104,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       currentTemperature.textContent = `${currentTemp}${tempPref} `;
       currentFeelsLike.textContent = `Feels Like: ${feelsLike}${tempPref}`;
       currentHumidity.textContent = `Humidity: ${humidity}%`;
-      //      const data = document.createElement = "div"
-      //      // give classname to element
-      //      // fit content of width/ height
-      //      // appendChild to temperatureData container
-      //      // see the basics of how it looks then stylize.
-      //  }
     } catch (error) {
       console.log(`Error fetching data` > error);
     }
@@ -122,8 +111,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log(`Error fetching data` > error);
   }
 });
-// OPTIMIZATIONS
-// get cookie fix to make it simple. I use it 3 times.
 
 //FUNCTIONS
 
