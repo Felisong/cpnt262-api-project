@@ -59,13 +59,52 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("cities").appendChild(previousCities);
   previousCities.style.textAlign = "center";
   cityArr.forEach((element) => {
-    let card = document.createElement("button");
-    card.className = "btn";
+    let container = document.createElement("div");
+    container.className = "grid-button";
+    let button = document.createElement("button");
+    button.className = "btn";
     let text = document.createElement("p");
     text.textContent = element;
-    text.style.display;
-    card.appendChild(text);
-    document.getElementById("cities").appendChild(card);
+    button.appendChild(text);
+    container.appendChild(button);
+    button.addEventListener("click", async () => {
+      try {
+        const geoData = await fetchData(
+          `https://api.openweathermap.org/data/2.5/weather?q=${element}&appid=${apiKey}`
+        );
+
+        if (!geoData || geoData.cod !== 200) {
+          throw new Error("City not found");
+        }
+
+        const lat = geoData.coord.lat;
+        const lon = geoData.coord.lon;
+
+        const weatherData = await fetchData(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
+        );
+
+        // Update UI with weather data
+        const tempPref = unit === "imperial" ? "°F" : "°C";
+        document.querySelector(".current-city").textContent = weatherData.name;
+        document.querySelector(".current-country").textContent =
+          weatherData.sys.country;
+        document.querySelector(
+          ".current-temp"
+        ).textContent = `${weatherData.main.temp}${tempPref}`;
+        document.querySelector(
+          ".feels-like"
+        ).textContent = `Feels Like: ${weatherData.main.feels_like}${tempPref}`;
+        document.querySelector(
+          ".humidity"
+        ).textContent = `Humidity: ${weatherData.main.humidity}%`;
+      } catch (error) {
+        console.log(`Error fetching weather data: ${error.message}`);
+      }
+    });
+
+    document.getElementById("cities").appendChild(container);
+
     //
     cityLocal = element;
   });
