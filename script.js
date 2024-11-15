@@ -76,8 +76,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     console.log(`is cityLocal correct?: ${cityLocal}`);
     button.addEventListener("click", async function () {
-      cityLocal = element; // Update cityLocal to the clicked city
-      await loadCityData(); // Call loadCityData to fetch and display data for the new city
+      cityLocal = element;
+      await loadCityData();
     });
   });
 });
