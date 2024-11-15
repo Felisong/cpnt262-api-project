@@ -176,7 +176,7 @@ async function loadCityData() {
       const currentTemperature = document.querySelector(".current-temp");
       const currentFeelsLike = document.querySelector(".feels-like");
       const currentHumidity = document.querySelector(".humidity");
-      const currentWind = document.querySelector(".wind-speed");
+      const condition = document.querySelector(".descript");
 
       //variables from data.
       const weatherId = weatherData.weather[0].id;
@@ -193,6 +193,9 @@ async function loadCityData() {
       currentTemperature.textContent = `${currentTemp}${tempPref} `;
       currentFeelsLike.textContent = `Feels Like: ${feelsLike}${tempPref}`;
       currentHumidity.textContent = `Humidity: ${humidity}%`;
+
+      // STYLIZATION FOR MODES.
+      condition.textContent = `Condition: ${weatherTrigger}`;
     } catch (error) {
       console.log(`Error fetching data` > error);
     }
