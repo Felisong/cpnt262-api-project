@@ -180,7 +180,7 @@ async function loadCityData() {
 
       //variables from data.
       const weatherId = weatherData.weather[0].id;
-      const weatherTrigger = weatherData.weather[0].main;
+      const weatherdesc = weatherData.weather[0].description;
       const currentTemp = weatherData.main.temp;
       const feelsLike = weatherData.main.feels_like;
       const humidity = weatherData.main.humidity;
@@ -195,7 +195,9 @@ async function loadCityData() {
       currentHumidity.textContent = `Humidity: ${humidity}%`;
 
       // STYLIZATION FOR MODES.
-      condition.textContent = `Condition: ${weatherTrigger}`;
+      condition.textContent = `Condition: ${weatherdesc}`;
+
+      // fix later. WEATHER ID IF ORS
     } catch (error) {
       console.log(`Error fetching data` > error);
     }
