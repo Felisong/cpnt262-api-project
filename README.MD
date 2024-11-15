@@ -1,6 +1,8 @@
 # Hello! Welcome to my basic Web Weather App
 
-This is a web app to tell you the temperature according to your inputs. It is practice to get the hang of writing code and pulling from an API. I am making this for a class assignment, to show I can make an html basis, style it with css and script its functionality/ interactivity with Javascript.
+I am Carolina, I am a student at SAIT (Southern Alberta Institute of Technology). I am making this for a class assignment, to show I can make an html basis, style it with css and script its functionality/ interactivity with Javascript.
+
+This is a web app to tell you the temperature according to your inputs. It is practice to get the hang of writing code and pulling from an API.
 
 I will be using cookies, local storage and session storage. I will also be manipulating the DOM according to the data I recieve from the API
 
