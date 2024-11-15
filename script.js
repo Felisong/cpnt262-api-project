@@ -18,12 +18,14 @@ let weatherData;
 let lat;
 let lon;
 
-console.log(greeting);
+// console.log(greeting);
 // API key
 const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 // // API call
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
+
+console.log(localStorage.getItem("city"));
 
 document.addEventListener("DOMContentLoaded", async function () {
   saveBtn.addEventListener("click", function () {
@@ -39,21 +41,34 @@ document.addEventListener("DOMContentLoaded", async function () {
   username = document.cookie.substring(9);
   greeting.textContent = `Hello, ${username}!`;
   unit = sessionStorage.getItem("unit") || "metric";
-
   // EVENT LISTENER BUTTON CLICK {
   // saves all inputs.
   submitBtn.addEventListener("click", function () {
     unit = celsius.checked ? "metric" : "imperial";
-    saveLocalStorage("city");
+    addCity(city.value);
     sessionStorage.setItem("unit", unit);
   });
   // UPDATED VALUES
   unit = sessionStorage.getItem("unit") || "metric";
-  cityLocal = localStorage.getItem("city");
+  cityLocal = getMostRecentCity() || "calgary";
+
+  const cityArr = getCities();
+  // make into function later
+  cityArr.forEach((element) => {
+    let card = document.createElement("div");
+    card.className = "city-card";
+    let text = document.createElement("p");
+    text.textContent = element;
+    text.style.display;
+    card.appendChild(text);
+    document.getElementById("cities").appendChild(card);
+  });
 
   // FETCH GEO API
   try {
-    geoData = await fetchData(geoApi);
+    geoData = await fetchData(
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`
+    );
     // error in case api is empty
     if (geoData === 0) {
       throw new erorr(error.message);
@@ -150,4 +165,25 @@ function clearCookies(id) {
 function getCookie(user) {
   const cookies = document.cookie;
   user.value = cookies.substring(9);
+}
+// test for storage
+// Function to add a new city
+function addCity(cityName) {
+  let cities = JSON.parse(localStorage.getItem("cities")) || [];
+
+  if (cities.length > 4) {
+    cities.shift();
+  }
+
+  cities.push(cityName); // Add the new city
+  localStorage.setItem("cities", JSON.stringify(cities));
+}
+
+// Function to get all stored cities
+function getCities() {
+  return JSON.parse(localStorage.getItem("cities")) || [];
+}
+function getMostRecentCity() {
+  let cities = getCities();
+  return cities.length > 0 ? cities[cities.length - 1] : null;
 }

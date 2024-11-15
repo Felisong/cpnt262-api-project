@@ -55,7 +55,7 @@
           <form id="save-cookie">
             <label><strong>Name?</strong></label>
             <br />
-            <input type="text" id="user-name" required />
+            <input type="text" id="user-name" required placeholder="Jane Doe" />
             <br />
             <button class="btn save-name" type="submit">Save Name</button>
             <br />
@@ -63,7 +63,13 @@
           <form id="form">
             <label> <strong>City?</strong></label>
             <br />
-            <input type="text" id="city" name="city" required />
+            <input
+              type="text"
+              id="city"
+              name="city"
+              required
+              placeholder="Calgary"
+            />
             <br />
             <label id="temp-unit">
               <strong> Preferred Unit? </strong>
@@ -91,6 +97,7 @@
             <button class="btn submitBtn" type="submit">Submit</button>
           </form>
         </div>
+        <div id="cities"></div>
       </main>
       <!-- <img src="tba" alt="a graphic of a cloud" class="cloud" />
       <img src="tbh" alt="" class="sun" /> -->
