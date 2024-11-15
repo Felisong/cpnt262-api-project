@@ -4,7 +4,7 @@ I am Carolina, I am a student at SAIT (Southern Alberta Institute of Technology)
 
 This is a web app to tell you the temperature according to your inputs. It is practice to get the hang of writing code and pulling from an API.
 
-I will be using cookies, local storage and session storage. I will also be manipulating the DOM according to the data I recieve from the API
+I will be using cookies, local storage and session storage. I will also be manipulating the DOM according to the data I receive from the API
 
 ## API 's
 
@@ -13,9 +13,7 @@ I will be using cookies, local storage and session storage. I will also be manip
 
 To access the site please go to:
 
-```
- [Weather Web App](https://felisong.github.io/cpnt262-api-project/)
-```
+[Weather Web App](https://felisong.github.io/cpnt262-api-project/)
 
 [repository link](https://github.com/Felisong/cpnt262-api-project.git)
 
