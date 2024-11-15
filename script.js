@@ -30,13 +30,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (saveName.value) {
       username = saveName.value;
       saveCookie("username", username);
+      greeting.textContent = `Hello, ${username}!`;
     } else {
       greeting.textContent = `Hello, Stranger!`;
     }
   });
   // updated variables for use later + dom manipulation. (greeting to user)
   username = document.cookie.substring(9);
-  greeting.textContent = `Hello, ${username}!`;
+  greeting.textContent = `Hello ${username}!`;
   unit = sessionStorage.getItem("unit") || "metric";
 
   // SUBMIT BUTTON GATHER DATA.
