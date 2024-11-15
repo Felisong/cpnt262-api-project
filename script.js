@@ -47,6 +47,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   unit = sessionStorage.getItem("unit") || "metric";
   cityLocal = getMostRecentCity() || "calgary";
 
+  // FETCH GEO API
+  loadCityData();
   // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
   if (cityArr !== null) {
@@ -65,138 +67,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     text.textContent = element;
     button.appendChild(text);
     container.appendChild(button);
-
     document.getElementById("cities").appendChild(container);
 
+    console.log(`is cityLocal correct?: ${cityLocal}`);
     button.addEventListener("click", async function () {
-      try {
-        // have to give cityLocal value again.
-        cityLocal = element;
-
-        geoData = await fetchData(
-          `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`
-        );
-        // error in case api is empty
-        if (geoData === 0) {
-          throw new erorr(error.message);
-          return;
-        }
-        // console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
-        //  VALUE FOR WEATHER API
-        let lat = geoData.coord["lat"];
-        let lon = geoData.coord["lon"];
-
-        // TRY FETCH WEATHER with values I now have.
-        try {
-          weatherData = await fetchData(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
-          );
-          console.log(element);
-          // error in case api is empty
-          if (weatherData === 0) {
-            throw new erorr(error.message);
-            return;
-          }
-          let tempPref;
-          if (unit === "imperial") {
-            tempPref = "°F";
-          } else {
-            tempPref = "°C";
-          }
-          // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
-          // VARIABLES
-          const whichCity = document.querySelector(".current-city");
-          const whichCountry = document.querySelector(".current-country");
-          const currentTemperature = document.querySelector(".current-temp");
-          const currentFeelsLike = document.querySelector(".feels-like");
-          const currentHumidity = document.querySelector(".humidity");
-          const currentWind = document.querySelector(".wind-speed");
-
-          //variables from data.
-          const weatherId = weatherData.weather[0].id;
-          const weatherTrigger = weatherData.weather[0].main;
-          const currentTemp = weatherData.main.temp;
-          const feelsLike = weatherData.main.feels_like;
-          const humidity = weatherData.main.humidity;
-          const country = weatherData.sys.country;
-          const currentCity = weatherData.name;
-
-          // DOM MANIPULATION
-          whichCity.textContent = `${currentCity}`;
-          whichCountry.textContent = `${country}`;
-          currentTemperature.textContent = `${currentTemp}${tempPref} `;
-          currentFeelsLike.textContent = `Feels Like: ${feelsLike}${tempPref}`;
-          currentHumidity.textContent = `Humidity: ${humidity}%`;
-        } catch (error) {
-          console.log(`Error fetching data` > error);
-        }
-      } catch (error) {
-        console.log(`Error fetching data` > error);
-      }
+      cityLocal = element; // Update cityLocal to the clicked city
+      await loadCityData(); // Call loadCityData to fetch and display data for the new city
     });
   });
-
-  // FETCH GEO API
-  try {
-    geoData = await fetchData(
-      `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`
-    );
-    // error in case api is empty
-    if (geoData === 0) {
-      throw new erorr(error.message);
-      return;
-    }
-    // console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
-    //  VALUE FOR WEATHER API
-    let lat = geoData.coord["lat"];
-    let lon = geoData.coord["lon"];
-
-    // TRY FETCH WEATHER with values I now have.
-    try {
-      weatherData = await fetchData(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
-      );
-      // error in case api is empty
-      if (weatherData === 0) {
-        throw new erorr(error.message);
-        return;
-      }
-      let tempPref;
-      if (unit === "imperial") {
-        tempPref = "°F";
-      } else {
-        tempPref = "°C";
-      }
-      // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
-      // VARIABLES
-      const whichCity = document.querySelector(".current-city");
-      const whichCountry = document.querySelector(".current-country");
-      const currentTemperature = document.querySelector(".current-temp");
-      const currentFeelsLike = document.querySelector(".feels-like");
-      const currentHumidity = document.querySelector(".humidity");
-      const currentWind = document.querySelector(".wind-speed");
-
-      //variables from data.
-      const weatherId = weatherData.weather[0].id;
-      const weatherTrigger = weatherData.weather[0].main;
-      const currentTemp = weatherData.main.temp;
-      const feelsLike = weatherData.main.feels_like;
-      const humidity = weatherData.main.humidity;
-      const country = weatherData.sys.country;
-      const currentCity = weatherData.name;
-
-      // DOM MANIPULATION
-      whichCity.textContent = `${currentCity}`;
-      whichCountry.textContent = `${country}`;
-      currentTemperature.textContent = `${currentTemp}${tempPref} `;
-      currentFeelsLike.textContent = `Feels Like: ${feelsLike}${tempPref}`;
-      currentHumidity.textContent = `Humidity: ${humidity}%`;
-    } catch (error) {
-      console.log(`Error fetching data` > error);
-    }
-  } catch (error) {
-    console.log(`Error fetching data` > error);
-  }
 });
 
 //FUNCTIONS
@@ -258,4 +136,67 @@ function getCities() {
 function getMostRecentCity() {
   let cities = getCities();
   return cities.length > 0 ? cities[cities.length - 1] : null;
+}
+
+async function loadCityData() {
+  try {
+    geoData = await fetchData(
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`
+    );
+    // error in case api is empty
+    if (geoData === 0) {
+      throw new erorr(error.message);
+      return;
+    }
+    // console.log(`geocoder response: ` + JSON.stringify(geoData, null, 2));
+    //  VALUE FOR WEATHER API
+    let lat = geoData.coord["lat"];
+    let lon = geoData.coord["lon"];
+
+    // TRY FETCH WEATHER with values I now have.
+    try {
+      weatherData = await fetchData(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
+      );
+      // error in case api is empty
+      if (weatherData === 0) {
+        throw new erorr(error.message);
+        return;
+      }
+      let tempPref;
+      if (unit === "imperial") {
+        tempPref = "°F";
+      } else {
+        tempPref = "°C";
+      }
+      // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
+      // VARIABLES
+      const whichCity = document.querySelector(".current-city");
+      const whichCountry = document.querySelector(".current-country");
+      const currentTemperature = document.querySelector(".current-temp");
+      const currentFeelsLike = document.querySelector(".feels-like");
+      const currentHumidity = document.querySelector(".humidity");
+      const currentWind = document.querySelector(".wind-speed");
+
+      //variables from data.
+      const weatherId = weatherData.weather[0].id;
+      const weatherTrigger = weatherData.weather[0].main;
+      const currentTemp = weatherData.main.temp;
+      const feelsLike = weatherData.main.feels_like;
+      const humidity = weatherData.main.humidity;
+      const country = weatherData.sys.country;
+      const currentCity = weatherData.name;
+
+      // DOM MANIPULATION
+      whichCity.textContent = `${currentCity}`;
+      whichCountry.textContent = `${country}`;
+      currentTemperature.textContent = `${currentTemp}${tempPref} `;
+      currentFeelsLike.textContent = `Feels Like: ${feelsLike}${tempPref}`;
+      currentHumidity.textContent = `Humidity: ${humidity}%`;
+    } catch (error) {
+      console.log(`Error fetching data` > error);
+    }
+  } catch (error) {
+    console.log(`Error fetching data` > error);
+  }
 }
