@@ -202,28 +202,6 @@ async function loadCityData() {
       // console.log(`body : ${body}`);
       // console.log(`content : ${content}`);
       // console.log(inputs);
-
-      // STYLIZATION FOR MODES.
-
-      if (weatherId >= 200 && weatherId <= 232) {
-        changeColor("thunder-storm");
-      } else if (weatherId >= 300 && weatherId <= 531) {
-        changeColor("light-rain");
-      } else if (weatherId >= 600 && weatherId <= 622) {
-        changeColor("snow");
-      } else if (weatherId >= 701 && weatherId <= 741) {
-        changeColor("grey-haze");
-      } else if (weatherId >= 751 && weatherId <= 781) {
-        changeColor("red-grey");
-      } else if (weatherId === 800) {
-        changeColor("body");
-      } else if (weatherId >= 801 && weatherId <= 804) {
-        body.style.backgroundColor = "#181717";
-        changeColor("cloudy");
-      } else {
-        changeColor("body");
-      }
-      // fix later. WEATHER ID IF ORS
     } catch (error) {
       console.log(`Error fetching data` > error);
     }
