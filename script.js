@@ -18,7 +18,6 @@ let weatherData;
 let lat;
 let lon;
 
-// console.log(greeting);
 // API key
 const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 // // API call
