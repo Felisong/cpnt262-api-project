@@ -10,15 +10,15 @@ const saveName = document.getElementById("user-name");
 // Local storage/ cookie variables if available.
 let cityLocal = localStorage.getItem("city");
 let unit = sessionStorage.getItem("unit");
-let username = getCookie("username");
+let username = getCookie("username") || null;
 
-// console.log(document.cookie);
 // loose
 let geoData;
 let weatherData;
 let lat;
 let lon;
 
+console.log(greeting);
 // API key
 const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 // // API call
@@ -26,11 +26,17 @@ const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&a
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
 document.addEventListener("DOMContentLoaded", async function () {
-  // Only prompt if username is null or undefined
   saveBtn.addEventListener("click", function () {
-    greetings();
+    // if true. run code.
+    if (saveName.value) {
+      username = saveName.value;
+      saveCookie("username", username);
+    } else {
+      greeting.textContent = `Hello, Stranger!`;
+    }
   });
-
+  username = document.cookie.substring(9);
+  greeting.textContent = `Hello, ${username}!`;
   unit = sessionStorage.getItem("unit") || "metric";
 
   // EVENT LISTENER BUTTON CLICK {
@@ -43,7 +49,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   // UPDATED VALUES
   unit = sessionStorage.getItem("unit") || "metric";
   cityLocal = localStorage.getItem("city");
-  console.log(unit);
 
   // FETCH GEO API
   try {
@@ -122,22 +127,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 //FUNCTIONS
 
-function greetings() {
-  if (username === null || username === undefined) {
-    username = saveName.value;
-    console.log(saveName.value);
-    // Only set to localStorage if user entered a name
-    if (username !== null && username !== " ") {
-      saveCookie("username", username);
-    }
-  }
-  if (username !== null) {
-    greeting.textContent = `Hello, ${username}!`;
-  } else {
-    greeting.textContent = `Hello, Stranger!`;
-  }
-}
-
 // fetch API
 const fetchData = async (url) => {
   const response = await fetch(url);
@@ -171,7 +160,7 @@ function clearCookies(id) {
   document.cookie = "myCookie=; max-age=300";
   document.getElementById(id).innerText = "No data stored.";
 }
-function getCookie(key) {
+function getCookie(user) {
   const cookies = document.cookie;
-  key.value = cookies.substring(9);
+  user.value = cookies.substring(9);
 }
