@@ -3,19 +3,22 @@ const city = document.getElementById("city");
 const radio = document.querySelector("radio-container");
 const celsius = document.getElementById("celsius");
 const fahrenheit = document.getElementById("fahrenheit");
-const submitBtn = document.querySelector(".btn");
+const submitBtn = document.querySelector(".submitBtn");
 const greeting = document.querySelector(".header-Intro");
-const temperatureData = document.querySelector(".temperature-data-container");
+const saveBtn = document.querySelector(".save-name");
+const saveName = document.getElementById("user-name");
 // Local storage/ cookie variables if available.
-let cityLocal = sessionStorage.getItem("city");
-let unit;
-let username = localStorage.getItem("username");
+let cityLocal = localStorage.getItem("city");
+let unit = sessionStorage.getItem("unit");
+let username = getCookie("username");
 
+// console.log(document.cookie);
 // loose
 let geoData;
 let weatherData;
 let lat;
 let lon;
+
 // API key
 const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
 // // API call
@@ -24,20 +27,23 @@ const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&l
 
 document.addEventListener("DOMContentLoaded", async function () {
   // Only prompt if username is null or undefined
-  greetings();
+  saveBtn.addEventListener("click", function () {
+    greetings();
+  });
 
-  unit = document.cookie.substring(5) || "metric";
+  unit = sessionStorage.getItem("unit") || "metric";
 
   // EVENT LISTENER BUTTON CLICK {
   // saves all inputs.
   submitBtn.addEventListener("click", function () {
     unit = celsius.checked ? "metric" : "imperial";
-    saveSessionStorage("city");
-    saveCookie("unit", unit);
+    saveLocalStorage("city");
+    sessionStorage.setItem("unit", unit);
   });
   // UPDATED VALUES
-  unit = document.cookie.substring(5) || "metric";
-  cityLocal = sessionStorage.getItem("city");
+  unit = sessionStorage.getItem("unit") || "metric";
+  cityLocal = localStorage.getItem("city");
+  console.log(unit);
 
   // FETCH GEO API
   try {
@@ -51,7 +57,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     //  VALUE FOR WEATHER API
     let lat = geoData.coord["lat"];
     let lon = geoData.coord["lon"];
-    console.log(`experiment= ` + unit);
 
     // TRY FETCH WEATHER with values I now have.
     try {
@@ -63,13 +68,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         throw new erorr(error.message);
         return;
       }
+      let tempPref;
       if (unit === "imperial") {
-        unit = "°F";
+        tempPref = "°F";
       } else {
-        unit = "°C";
+        tempPref = "°C";
       }
 
-      console.log(unit);
+      console.log(tempPref);
       // temperatureData; is the container for the data
       // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
       // console.log(weatherData);
@@ -92,16 +98,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       const country = weatherData.sys.country;
       const currentCity = weatherData.name;
 
-      console.log(weatherData);
       // DOM MANIPULATION
       whichCity.textContent = `${currentCity}`;
       whichCountry.textContent = `${country}`;
-      currentTemperature.textContent = `${currentTemp}${unit} `;
-      currentFeelsLike.textContent = `Feels Like: ${feelsLike}${unit}`;
+      currentTemperature.textContent = `${currentTemp}${tempPref} `;
+      currentFeelsLike.textContent = `Feels Like: ${feelsLike}${tempPref}`;
       currentHumidity.textContent = `Humidity: ${humidity}%`;
-      // console.log(`typeof test: ${typeof weatherTrigger}`);
-      // console.log(`weather Trigger: ${JSON.stringify(weatherData)}`);
-
       //      const data = document.createElement = "div"
       //      // give classname to element
       //      // fit content of width/ height
@@ -122,13 +124,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 function greetings() {
   if (username === null || username === undefined) {
-    username = prompt("Please enter your name:");
+    username = saveName.value;
+    console.log(saveName.value);
     // Only set to localStorage if user entered a name
     if (username !== null && username !== " ") {
-      localStorage.setItem("username", username);
+      saveCookie("username", username);
     }
   }
-  if (username) {
+  if (username !== null) {
     greeting.textContent = `Hello, ${username}!`;
   } else {
     greeting.textContent = `Hello, Stranger!`;
@@ -170,7 +173,5 @@ function clearCookies(id) {
 }
 function getCookie(key) {
   const cookies = document.cookie;
-  key.value = cookies.substring(4);
+  key.value = cookies.substring(9);
 }
-
-// GET TEMPERATURE UNIT WORKING AS INTENDED. ITS BREAKING RIGHT AFTER GET COOKIE WITH CONSOLE LOGS

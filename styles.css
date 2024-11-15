@@ -46,9 +46,8 @@ header {
 .city-and-temp {
   display: flex;
   align-items: center;
-}
-.current-temp {
-  margin-left: 4rem;
+  width: 300px;
+  justify-content: space-around;
 }
 .text-section {
   text-align: center;
@@ -64,6 +63,7 @@ header {
   padding: 2rem;
   margin: 1rem;
   border-radius: 6px;
+  height: fit-content;
   width: 60vw;
   text-align: center;
 }
@@ -71,7 +71,7 @@ header {
 .radio-container {
   text-align: start;
 }
-#city {
+input {
   border-radius: 6px;
 }
 /* button */
@@ -137,7 +137,7 @@ p {
     width: 200px;
   }
   .input-container {
-    height: 200px;
+    height: fit-content;
     width: 200px;
     text-align: start;
   }
