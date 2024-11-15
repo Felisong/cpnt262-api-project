@@ -12,12 +12,12 @@ I will be using cookies, local storage and session storage. I will also be manip
 To access the site please go to:
 
 ```
- link here
+ [Weather Web App](https://felisong.github.io/cpnt262-api-project/)
 ```
 
 [repository link](https://github.com/Felisong/cpnt262-api-project.git)
 
-I will be adding more to this later. I am just creating this so I can start work on it soon.
+it works once you fill out the form with a city. Please provide your name in the input, a city, and select your desired unit of temperature.
 
 ## Attributes
 
@@ -27,14 +27,10 @@ I will be adding more to this later. I am just creating this so I can start work
 
 - [dev.tp](https://dev.to/alexmercedcoder/making-multiple-api-calls-in-javascript-kip)
 
-- [perplexity.ai](https://www.perplexity.ai) for specific questions on specific pieces of code.
+- [perplexity.ai](https://www.perplexity.ai) for guidance when I could not find documentation related, or for issues troubleshooting.
 
 - [stackoverflow.com](https://stackoverflow.com/)
   -specifically [this one](https://stackoverflow.com/questions/58211513/how-can-i-display-a-javascript-prompt-once-on-website-load)
-
-https://icon-sets.iconify.design/hugeicons/celsius/
-
-https://icon-sets.iconify.design/hugeicons/fahrenheit/
 
 ## Psuedo Code
 
