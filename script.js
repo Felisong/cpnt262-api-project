@@ -55,9 +55,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (cityLocal) {
     addCity(cityLocal);
   } else {
-    throw new error("city not valid. Please check spelling");
-    document.querySelector(".details").innerHTML =
-      "<p>city not valid. Please check spelling</p>";
+    throw new Error("city not valid. Please check spelling");
   }
 
   // get data from localStorage as an array, then create element for each.
