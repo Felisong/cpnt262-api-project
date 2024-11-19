@@ -19,7 +19,7 @@ let lat;
 let lon;
 
 // API key
-const apiKey = `__API_KEY__`;
+const apiKey = "__API_KEY__";
 // // API call
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
