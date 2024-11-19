@@ -19,7 +19,7 @@ let lat;
 let lon;
 
 // API key
-const apiKey = `dc20084f2a7551ca41da945c1298f0c7`;
+const apiKey = `__API_KEY__`;
 // // API call
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
@@ -41,16 +41,24 @@ document.addEventListener("DOMContentLoaded", async function () {
   // SUBMIT BUTTON GATHER DATA.
   submitBtn.addEventListener("click", function () {
     unit = celsius.checked ? "metric" : "imperial";
-    addCity(city.value);
+    let city = city.value;
+    localStorage.setItem("fetchCity", city);
     sessionStorage.setItem("unit", unit);
   });
 
   // UPDATED VALUES
   unit = sessionStorage.getItem("unit") || "metric";
-  cityLocal = getMostRecentCity() || "calgary";
+  cityLocal = localStorage.getItem("fetchCity");
 
   // FETCH GEO API
   loadCityData();
+  if (cityLocal) {
+    addCity(cityLocal);
+  } else {
+    throw new error("city not valid. Please check spelling");
+    document.querySelector(".details").innerHTML =
+      "<p>city not valid. Please check spelling</p>";
+  }
 
   // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
