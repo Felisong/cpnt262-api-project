@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     addCity(city.value);
     sessionStorage.setItem("unit", unit);
   });
-
   // UPDATED VALUES
   unit = sessionStorage.getItem("unit") || "metric";
   cityLocal = getMostRecentCity() || "calgary";
@@ -73,7 +72,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     container.appendChild(button);
     document.getElementById("cities").appendChild(container);
 
-    console.log(`is cityLocal correct?: ${cityLocal}`);
+    // console.log(`is cityLocal correct?: ${cityLocal}`);
     button.addEventListener("click", async function () {
       cityLocal = element;
       await loadCityData();
@@ -152,7 +151,7 @@ async function loadCityData() {
       throw new erorr(error.message);
       return;
     }
-    console.log(`geocoder response: ` + JSON.stringify(geoData));
+    // console.log(`geocoder response: ` + JSON.stringify(geoData));
     //  VALUE FOR WEATHER API
     let lat = geoData.coord["lat"];
     let lon = geoData.coord["lon"];
@@ -164,14 +163,14 @@ async function loadCityData() {
       );
       // error in case api is empty
       if (weatherData === 0) {
-        throw new erorr(error.message);
+        throw new Erorr(error.message);
         return;
       }
       let tempPref;
-      if (unit === "imperial") {
-        tempPref = "°F";
-      } else {
+      if (unit === "metric") {
         tempPref = "°C";
+      } else {
+        tempPref = "°F";
       }
       // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
       // VARIABLES
