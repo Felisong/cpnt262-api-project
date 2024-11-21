@@ -24,8 +24,6 @@ const apiKey = `__API_KEY__`;
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
-console.log(`first unit check: `, unit);
-
 document.addEventListener("DOMContentLoaded", async function () {
   // save username
   saveBtn.addEventListener("click", function () {
@@ -35,7 +33,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       greeting.textContent = `Hello, ${username}!`;
     }
   });
-  console.log(`second unit check: `, unit);
   // updated variables for use later + dom manipulation. (greeting to user)
   username = document.cookie.substring(9);
   greeting.textContent = `Hello ${username}!`;
@@ -43,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // SUBMIT BUTTON GATHER DATA.
   submitBtn.addEventListener("click", function () {
-    unit = celsius.checked ? "imperial" : "metric";
+    unit = celsius.checked ? "metric" : "imperial";
     addCity(city.value);
     sessionStorage.setItem("unit", unit);
   });
@@ -54,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // FETCH GEO API
   loadCityData();
-  console.log(`third unit check: `, unit);
+
   // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
   if (cityArr !== null) {
@@ -76,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     container.appendChild(button);
     document.getElementById("cities").appendChild(container);
 
-    // console.log(`is cityLocal correct?: ${cityLocal}`);
+    console.log(`is cityLocal correct?: ${cityLocal}`);
     button.addEventListener("click", async function () {
       cityLocal = element;
       await loadCityData();
@@ -155,7 +152,7 @@ async function loadCityData() {
       throw new erorr(error.message);
       return;
     }
-    // console.log(`geocoder response: ` + JSON.stringify(geoData));
+    console.log(`geocoder response: ` + JSON.stringify(geoData));
     //  VALUE FOR WEATHER API
     let lat = geoData.coord["lat"];
     let lon = geoData.coord["lon"];
@@ -167,7 +164,7 @@ async function loadCityData() {
       );
       // error in case api is empty
       if (weatherData === 0) {
-        throw new Erorr(error.message);
+        throw new erorr(error.message);
         return;
       }
       let tempPref;
