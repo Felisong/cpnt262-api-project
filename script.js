@@ -24,6 +24,8 @@ const apiKey = `__API_KEY__`;
 const geoApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityLocal}&appid=${apiKey}`;
 const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
+console.log(`first unit check: `, unit);
+
 document.addEventListener("DOMContentLoaded", async function () {
   // save username
   saveBtn.addEventListener("click", function () {
@@ -33,26 +35,26 @@ document.addEventListener("DOMContentLoaded", async function () {
       greeting.textContent = `Hello, ${username}!`;
     }
   });
-  console.log(`first unit check: `, unit);
+  console.log(`second unit check: `, unit);
   // updated variables for use later + dom manipulation. (greeting to user)
   username = document.cookie.substring(9);
   greeting.textContent = `Hello ${username}!`;
   unit = sessionStorage.getItem("unit") || "metric";
-  console.log(`second unit check: `, unit);
+
   // SUBMIT BUTTON GATHER DATA.
   submitBtn.addEventListener("click", function () {
-    unit = celsius.checked ? "metric" : "imperial";
+    unit = celsius.checked ? "imperial" : "metric";
     addCity(city.value);
     sessionStorage.setItem("unit", unit);
   });
-  console.log(`third unit check: `, unit);
+
   // UPDATED VALUES
   unit = sessionStorage.getItem("unit") || "metric";
   cityLocal = getMostRecentCity() || "calgary";
 
   // FETCH GEO API
   loadCityData();
-
+  console.log(`third unit check: `, unit);
   // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
   if (cityArr !== null) {
@@ -169,10 +171,10 @@ async function loadCityData() {
         return;
       }
       let tempPref;
-      if (unit === "metric") {
-        tempPref = "°C";
-      } else {
+      if (unit === "imperial") {
         tempPref = "°F";
+      } else {
+        tempPref = "°C";
       }
       // console.log(`show me the data: ` + JSON.stringify(weatherData, null, 2));
       // VARIABLES
