@@ -44,13 +44,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     addCity(city.value);
     sessionStorage.setItem("unit", unit);
   });
+  console.log(`first unit check: `, unit);
   // UPDATED VALUES
   unit = sessionStorage.getItem("unit") || "metric";
   cityLocal = getMostRecentCity() || "calgary";
-
+  console.log(`second unit check: `, unit);
   // FETCH GEO API
   loadCityData();
-
+  console.log(`third unit check: `, unit);
   // get data from localStorage as an array, then create element for each.
   const cityArr = getCities();
   if (cityArr !== null) {
